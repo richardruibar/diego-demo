@@ -1,5 +1,7 @@
 twig:
     file_name_pattern: '*.twig'
+    globals:
+        dateTimeFormat: '%date_time_format%'
 
 when@test:
     twig:

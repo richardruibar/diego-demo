@@ -20,7 +20,7 @@
                     <span class="comments-count">{{ 'comments'|trans({'count': post.comments.count()}) }}</span>
                     <a href="{{ path('post', {slug: post.slug}) }}#add-comment">&plus;</a>
                 </p>
-                <p>Publikováno: {{ post.createdAt|date("j.n.Y H:i:s") }}</p>
+                <p>Publikováno: {{ post.createdAt|date(dateTimeFormat) }}</p>
                 <p><a href="{{ path('post', {slug: post.slug}) }}">Celý příspěvek</a></p>
             </footer>
         </article>
