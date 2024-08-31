@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Děkujeme za komentář k {{ post.title }}{% endblock %}
+
+{% block body %}
+<main>
+    <header>
+        <h1>Děkujeme za komentář k {{ post.title }}</h1>
+    </header>
+
+    <section class="article-content">
+        <a href="{{ path('post', {slug: post.slug}) }}">&lt;&lt; Zpět na příspěvek</a>
+    </section>
+
+</main>
+{% endblock %}

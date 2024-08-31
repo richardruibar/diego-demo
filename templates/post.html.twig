@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block body %}
+<main>
+    <article>
+        <header>
+            <h1>{{ post.title }}</h1>
+            <p>Autor: <span class="author">{{ post.author }}</span></p>
+            <p>Publikováno: {{ post.createdAt|date("j.n.Y H:i:s") }}</p>
+        </header>
+
+        <section class="article-content">
+            {{ post.content }}
+        </section>
+    </article>
+
+    {% if post.comments.count() > 0 %}
+        <section class="comments">
+            <header>
+                <h2>Komentáře</h2>
+            </header>
+            <ul>
+        {% for comment in post.comments %}
+            <li>
+                <article>
+                    <header>
+                        <h3>{{ comment.title }}</h3>
+                        <p>Autor: <span class="author">{{ comment.author }}</span></p>
+                    </header>
+                    <p>{{ comment.content }}</p>
+                </article>
+            </li>
+
+        {% endfor %}
+            </ul>
+        </section>
+    {% endif %}
+</main>
+
+<section class="comment-form">
+    <h2>Přidat komentář</h2>
+    {{ form(form) }}
+</section>
+{% endblock %}

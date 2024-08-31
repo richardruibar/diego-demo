@@ -11,13 +11,17 @@
     {% for post in posts %}
         <article>
             <header>
-                <h2>{{ post.title }}</h2>
+                <h2><a href="{{ path('post', {slug: post.slug}) }}">{{ post.title }}</a></h2>
                 <p>Autor: <span class="author">{{ post.author }}</span></p>
             </header>
             <p class="annotation">{{ post.annotation }}</p>
             <footer>
-                <p><span class="comments-count">{{ 'comments'|trans({'count': post.comments.count()}) }}</span></p>
+                <p>
+                    <span class="comments-count">{{ 'comments'|trans({'count': post.comments.count()}) }}</span>
+                    <a href="{{ path('post', {slug: post.slug}) }}#add-comment">&plus;</a>
+                </p>
                 <p>Publikováno: {{ post.createdAt|date("j.n.Y H:i:s") }}</p>
+                <p><a href="{{ path('post', {slug: post.slug}) }}">Celý příspěvek</a></p>
             </footer>
         </article>
 
