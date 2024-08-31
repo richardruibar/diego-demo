@@ -1,3 +1,27 @@
-body {
-    background-color: skyblue;
+html {
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: 'Open Sans', Arial, sans-serif;
+    line-height: 150%;
+    font-size: 16px;
+}
+
+.author {
+    font-weight: bold;
+}
+
+.annotation {
+    font-style: italic;
+}
+
+.comments-count {
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 200%;
+}
+
+h2 {
+    font-size: 150%;
 }

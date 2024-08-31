@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Veřejná homepage s výpisem příspěvků{% endblock %}
+
+{% block body %}
+<main>
+    <section>
+        <header>
+            <h1>Příspěvky</h1>
+        </header>
+    {% for post in posts %}
+        <article>
+            <header>
+                <h2>{{ post.title }}</h2>
+                <p>Autor: <span class="author">{{ post.author }}</span></p>
+            </header>
+            <p class="annotation">{{ post.annotation }}</p>
+            <footer>
+                <p><span class="comments-count">{{ 'comments'|trans({'count': post.comments.count()}) }}</span></p>
+                <p>Publikováno: {{ post.createdAt|date("j.n.Y H:i:s") }}</p>
+            </footer>
+        </article>
+
+    {% endfor %}
+    </section>
+</main>
+{% endblock %}
