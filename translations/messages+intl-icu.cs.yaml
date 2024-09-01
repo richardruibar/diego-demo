@@ -7,3 +7,5 @@ comments: >-
       =4    {# komentáře}
       other {# komentářů}
   }
+delete_soft: Odstranit soft
+delete_hard: Odstranit hard

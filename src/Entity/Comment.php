@@ -118,4 +118,9 @@ class Comment
     {
         $this->createdAt = new \DateTimeImmutable();
     }
+
+    public function __toString()
+    {
+        return $this->title ?? '';
+    }
 }

@@ -10,3 +10,11 @@ services:
       - { name: doctrine.event_listener, event: 'loadClassMetadata' }
     calls:
       - [ setAnnotationReader, [ "@gedmo.mapping.driver.attribute" ] ]
+      
+  gedmo.listener.softdeleteable:
+    class: Gedmo\SoftDeleteable\SoftDeleteableListener
+    tags:
+      - { name: doctrine.event_listener, event: 'onFlush' }
+      - { name: doctrine.event_listener, event: 'loadClassMetadata' }
+    calls:
+      - [ setAnnotationReader, [ "@gedmo.mapping.driver.attribute" ] ]

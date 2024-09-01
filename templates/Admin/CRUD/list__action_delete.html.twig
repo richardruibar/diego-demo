@@ -1,0 +1,26 @@
+{# customized: vendor/sonata-project/admin-bundle/src/Resources/views/CRUD/list__action_delete.html.twig #}
+
+{% if admin.hasAccess('delete', object) and admin.hasRoute('delete') %}
+    {% set button_content = sonata_config.getOption('list_action_button_content') %}
+    {% if object.getDeletedAt is not null %}
+        {% set button_label = 'delete_hard'|trans({}, 'messages') %}
+    {% else %}
+        {% set button_label = 'delete_soft'|trans({}, 'messages') %}
+    {% endif %}
+    <a
+            href="{{ admin.generateObjectUrl('delete', object, actions.link_parameters|default([])) }}"
+            class="btn btn-sm btn-default delete_link{% if object.getDeletedAt is not null %} delete_hard{% endif %}"
+            title="{{ button_label }}"
+    >
+        {% if button_content == 'icon' or button_content == 'all' %}
+            <i class="fas fa-times" aria-hidden="true"></i>
+        {% endif %}
+        {% if button_content == 'text' or button_content == 'all' %}
+            {{ button_label }}
+        {% else %}
+            <span class="sr-only">
+                {{ button_label }}
+            </span>
+        {% endif %}
+    </a>
+{% endif %}
