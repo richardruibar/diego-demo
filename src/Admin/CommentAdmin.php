@@ -72,6 +72,8 @@ final class CommentAdmin extends BaseAdmin
 
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $filter->add('post');
+        if ( ! $this->isChild()) {
+            $filter->add('post');
+        }
     }
 }

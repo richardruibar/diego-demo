@@ -31,6 +31,8 @@ services:
         class: App\Admin\PostAdmin
         tags:
             - { name: sonata.admin, model_class: App\Entity\Post, manager_type: orm, label: Příspěvky }
+        calls:
+            - [addChild, ['@App\Admin\CommentAdmin', 'post']]
 
     App\Admin\CommentAdmin:
         class: App\Admin\CommentAdmin

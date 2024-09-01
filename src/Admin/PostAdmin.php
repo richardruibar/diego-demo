@@ -3,6 +3,8 @@
 namespace App\Admin;
 
 use App\Entity\Post;
+use Knp\Menu\ItemInterface as MenuItemInterface;
+use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -17,6 +19,26 @@ final class PostAdmin extends BaseAdmin
         ?string $baseControllerName = null
     ) {
         parent::__construct($code, $class, $baseControllerName);
+    }
+
+    protected function configureTabMenu(MenuItemInterface $menu, string $action, ?AdminInterface $childAdmin = null): void
+    {
+        if (!$childAdmin && !in_array($action, ['edit'])) {
+            return;
+        }
+
+        $admin = $this->isChild() ? $this->getParent() : $this;
+        $id = $admin->getRequest()->get('id');
+
+        $menu
+            ->addChild('Příspěvek', $admin->generateMenuUrl('App\Admin\PostAdmin.edit', ['id' => $id]))
+            ->setAttribute('icon', Config::ICO_POST)
+        ;
+
+        $menu
+            ->addChild('Komentáře', $admin->generateMenuUrl('App\Admin\CommentAdmin.list', ['id' => $id]))
+            ->setAttribute('icon', Config::ICO_COMMENT)
+        ;
     }
 
     protected function configureFormFields(FormMapper $form): void

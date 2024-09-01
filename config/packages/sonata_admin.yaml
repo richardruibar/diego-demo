@@ -3,6 +3,14 @@ sonata_admin:
     dashboard:
         blocks:
             - { type: sonata.admin.block.admin_list, position: left }
+        groups:
+            default:
+                keep_open: true
+                label: Obsah
+                items:
+                    - App\Admin\PostAdmin
+                    - App\Admin\CommentAdmin
+
     assets:
         extra_stylesheets:
             - styles/admin.css
