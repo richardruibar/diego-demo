@@ -13,5 +13,10 @@
     </head>
     <body>
         {% block body %}{% endblock %}
+        {% block footer %}
+        <footer>
+            <a href="{{ path('app_login') }}">Admin login</a>
+        </footer>
+        {% endblock %}
     </body>
 </html>

@@ -10,7 +10,8 @@ sonata_admin:
                 items:
                     - App\Admin\PostAdmin
                     - App\Admin\CommentAdmin
-
+                    - route: app_logout
+                      label: Odhlásit
     assets:
         extra_stylesheets:
             - styles/admin.css

@@ -4,10 +4,12 @@ namespace App\DataFixtures;
 
 use App\Entity\Comment;
 use App\Entity\Post;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
@@ -19,12 +21,14 @@ class AppFixtures extends Fixture
 
     private Generator $faker;
 
-    public function __construct() {
+    public function __construct(private UserPasswordHasherInterface $passwordHasher) {
         $this->faker = Factory::create('cs_CZ');
     }
 
     public function load(ObjectManager $manager): void
     {
+        $this->createUserAdmin($manager);
+
         for ($i=0; $i < self::NUMBER_OF_POSTS; ++$i) {
             $post = $this->createPost();
             $manager->persist($post);
@@ -32,6 +36,23 @@ class AppFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    private function createUserAdmin(ObjectManager $manager)
+    {
+        $user = new User();
+        $user
+            ->setEmail('admin@example.com')
+            ->setRoles(['ROLE_ADMIN']);
+
+        $hashedPassword = $this->passwordHasher->hashPassword(
+            $user,
+            plainPassword: '123456'
+        );
+
+        $user->setPassword($hashedPassword);
+
+        $manager->persist($user);
     }
 
     private function createPost(): Post

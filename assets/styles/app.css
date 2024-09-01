@@ -56,3 +56,15 @@ textarea {
 form div {
     margin: 0.5rem 0;
 }
+
+button {
+    background-color: #ba0001;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    font-size: 150%;
+    border: none;
+}
+
+a {
+    color: #ba0001;
+}
