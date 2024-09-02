@@ -105,6 +105,9 @@ final class PostAdmin extends BaseAdmin
                 'actions' => [
                     'delete' => [],
                     'edit' => [],
+                    'comments' => [
+                        'template' => 'Admin/CRUD/list__action_comments.html.twig',
+                    ],
                 ],
                 'header_style' => Config::POST_LIST_ACTIONS_HEADER_STYLE,
             ])

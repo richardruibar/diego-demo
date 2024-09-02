@@ -170,6 +170,17 @@ class Post
         }
     }
 
+    public function isAbleToHardDelete(): bool
+    {
+        foreach ($this->comments as $comment) {
+            if ($comment->getDeletedAt() === null) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public function __toString()
     {
         return $this->title ?? '';
