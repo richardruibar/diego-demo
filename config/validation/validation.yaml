@@ -1,0 +1,63 @@
+App\Entity\Comment:
+  properties:
+    title:
+      - Length:
+          min: 5
+          max: 150
+          minMessage: 'Nadpis musí být alespoň {{ limit }} znaků'
+          maxMessage: 'Nadpis nemůže mít více než {{ limit }} znaků'
+    author:
+      - Length:
+          min: 5
+          max: 50
+          minMessage: 'Autor musí být alespoň {{ limit }} znaků'
+          maxMessage: 'Autor nemůže mít více než {{ limit }} znaků'
+    content:
+      - Length:
+          min: 5
+          max: 65535
+          minMessage: 'Obsah musí být alespoň {{ limit }} znaků'
+          maxMessage: 'Obsah nemůže mít více než {{ limit }} znaků'
+    post:
+      - NotBlank: ~
+
+App\Entity\Post:
+  properties:
+    title:
+      - Length:
+          min: 5
+          max: 150
+          minMessage: 'Nadpis musí být alespoň {{ limit }} znaků'
+          maxMessage: 'Nadpis nemůže mít více než {{ limit }} znaků'
+    author:
+      - Length:
+          min: 5
+          max: 50
+          minMessage: 'Autor musí být alespoň {{ limit }} znaků'
+          maxMessage: 'Autor nemůže mít více než {{ limit }} znaků'
+    annotation:
+      - Length:
+          min: 5
+          max: 255
+          minMessage: 'Anotace musí být alespoň {{ limit }} znaků'
+          maxMessage: 'Anotace nemůže mít více než {{ limit }} znaků'
+    content:
+      - Length:
+          min: 5
+          max: 4294967295
+          minMessage: 'Obsah musí být alespoň {{ limit }} znaků'
+          maxMessage: 'Obsah nemůže mít více než {{ limit }} znaků'
+
+App\Entity\User:
+  properties:
+    email:
+      - Length:
+          min: 3
+          max: 180
+          minMessage: 'Email musí být alespoň {{ limit }} znaků'
+          maxMessage: 'Email nemůže mít více než {{ limit }} znaků, pokud je to pro vás problém, kontaktujte podporu prosím.'
+      - Email:
+          message: 'Email "{{ value }}" není validní.'
+
+    password:
+      - NotBlank: ~
