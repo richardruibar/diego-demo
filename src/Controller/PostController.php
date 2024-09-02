@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Controller;
 
@@ -13,15 +14,18 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class PostController extends AbstractController
 {
-    public function __construct(private EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager
+    ) {
     }
 
     #[Route('/', name: 'home_page')]
     public function homePage(): Response
     {
         return $this->render('index.html.twig', [
-            'posts' => $this->entityManager->getRepository(Post::class)->fetchAll(),
+            'posts' => $this->entityManager->getRepository(
+                Post::class
+            )->fetchAll(),
         ]);
     }
 
@@ -31,7 +35,8 @@ class PostController extends AbstractController
         $this->entityManager->getFilters()->enable('softdeleteable');
 
         /** @var Post $post */
-        $post = $this->entityManager->getRepository(Post::class)->findOneBySlug($slug);
+        $post = $this->entityManager->getRepository(Post::class)
+            ->findOneBy(['slug' => $slug]);
 
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
@@ -57,7 +62,8 @@ class PostController extends AbstractController
     public function thanksForPost(string $slug): Response
     {
         /** @var Post $post */
-        $post = $this->entityManager->getRepository(Post::class)->findOneBySlug($slug);
+        $post = $this->entityManager->getRepository(Post::class)
+            ->findOneBy(['slug' => $slug]);
 
         return $this->render('thanks.html.twig', [
             'post' => $post,

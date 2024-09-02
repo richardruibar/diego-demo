@@ -1,4 +1,10 @@
 <?php
+/**
+ * @noinspection PhpMultipleClassDeclarationsInspection
+ * Due to bug in PHP Storm
+ * @link https://youtrack.jetbrains.com/issue/WI-71013/Multiple-definitions-exist-for-class-for-definitions-inside-if-else-statement
+ */
+declare(strict_types=1);
 
 namespace App\Repository;
 
@@ -6,9 +12,6 @@ use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @extends ServiceEntityRepository<Post>
- */
 class PostRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -22,7 +25,7 @@ class PostRepository extends ServiceEntityRepository
     public function fetchAll(): array
     {
         return $this->createQueryBuilder('p')
-            ->orderBy('p.createdAt', 'ASC')
+            ->orderBy('p.createdAt', 'DESC')
             ->getQuery()
             ->getResult()
         ;

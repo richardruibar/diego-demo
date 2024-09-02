@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Admin;
 
@@ -21,9 +22,12 @@ final class PostAdmin extends BaseAdmin
         parent::__construct($code, $class, $baseControllerName);
     }
 
-    protected function configureTabMenu(MenuItemInterface $menu, string $action, ?AdminInterface $childAdmin = null): void
-    {
-        if (!$childAdmin && !in_array($action, ['edit'])) {
+    protected function configureTabMenu(
+        MenuItemInterface $menu,
+        string $action,
+        ?AdminInterface $childAdmin = null
+    ): void {
+        if ( ! $childAdmin && $action != 'edit') {
             return;
         }
 
@@ -31,12 +35,24 @@ final class PostAdmin extends BaseAdmin
         $id = $admin->getRequest()->get('id');
 
         $menu
-            ->addChild('Příspěvek', $admin->generateMenuUrl('App\Admin\PostAdmin.edit', ['id' => $id]))
+            ->addChild(
+                'Příspěvek',
+                $admin->generateMenuUrl(
+                    'App\Admin\PostAdmin.edit',
+                    ['id' => $id]
+                )
+            )
             ->setAttribute('icon', Config::ICO_POST)
         ;
 
         $menu
-            ->addChild('Komentáře', $admin->generateMenuUrl('App\Admin\CommentAdmin.list', ['id' => $id]))
+            ->addChild(
+                'Komentáře',
+                $admin->generateMenuUrl(
+                    'App\Admin\CommentAdmin.list',
+                    ['id' => $id]
+                )
+            )
             ->setAttribute('icon', Config::ICO_COMMENT)
         ;
     }
@@ -79,7 +95,9 @@ final class PostAdmin extends BaseAdmin
                 'label' => 'Publikováno',
                 'accessor' =>
                     function (Post $post) {
-                        return $post->getCreatedAt()->format($this->dateTimeFormat);
+                        return $post->getCreatedAt()->format(
+                            $this->dateTimeFormat
+                        );
                     },
             ])
             ->add(ListMapper::NAME_ACTIONS, null, [

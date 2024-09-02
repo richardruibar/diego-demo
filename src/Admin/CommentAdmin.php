@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Admin;
 
@@ -19,7 +20,7 @@ final class CommentAdmin extends BaseAdmin
     ) {
         parent::__construct($code, $class, $baseControllerName);
     }
-    
+
     protected function configureFormFields(FormMapper $form): void
     {
         $form
@@ -54,7 +55,9 @@ final class CommentAdmin extends BaseAdmin
                 'label' => 'Odesláno',
                 'accessor' =>
                     function (Comment $post) {
-                        return $post->getCreatedAt()->format($this->dateTimeFormat);
+                        return $post->getCreatedAt()->format(
+                            $this->dateTimeFormat
+                        );
                     },
             ])
             ->add(ListMapper::NAME_ACTIONS, null, [
