@@ -6,12 +6,13 @@ use App\Entity\Comment;
 use App\Entity\Post;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class AppFixtures extends Fixture
+class AppFixtures extends Fixture implements FixtureGroupInterface
 {
     private const NUMBER_OF_POSTS = 5;
 
@@ -96,5 +97,10 @@ class AppFixtures extends Fixture
         ;
 
         return $comment;
+    }
+
+    public static function getGroups(): array
+    {
+        return ['app'];
     }
 }
