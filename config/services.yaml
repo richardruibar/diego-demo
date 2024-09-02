@@ -7,6 +7,10 @@ parameters:
     locale: cs
     date_time_format: j.n.Y H:i:s
 
+when@test:
+    parameters:
+        app.host: '%env(APP_HOST)%'
+
 services:
     # default configuration for services in *this* file
     _defaults:
