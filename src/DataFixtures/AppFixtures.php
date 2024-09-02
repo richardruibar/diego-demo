@@ -86,7 +86,6 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
 
         for ($i = 0; $i < $numberOfComments; ++$i) {
             $comment = $this->createComment();
-            $manager->persist($comment);
             $post->addComment($comment);
 
             if (rand(0, 10) < 1) {

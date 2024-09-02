@@ -226,7 +226,6 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
     {
         foreach (self::COMMENTS as $commentData) {
             $comment = $this->createComment($commentData, $post->getId().' ');
-            $manager->persist($comment);
             $post->addComment($comment);
         }
     }
