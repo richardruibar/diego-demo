@@ -2,6 +2,7 @@
 
 namespace App\Tests\Controller;
 
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class HomePageControllerTest extends WebTestCase
@@ -16,14 +17,25 @@ class HomePageControllerTest extends WebTestCase
         $this->assertSelectorTextContains('h1', 'Příspěvky');
     }
 
-    private function getConfiguredClient(): \Symfony\Bundle\FrameworkBundle\KernelBrowser|\Symfony\Component\BrowserKit\AbstractBrowser|null
+    private function getConfiguredClient(): KernelBrowser
     {
         $client = static::createClient();
         $client->setServerParameter(
             'HTTP_HOST',
-            $this->getContainer()->getParameter('app.host')
+            $this->fetchHost()
         );
 
         return $client;
+    }
+
+    private function fetchHost(): string
+    {
+        $host = $this->getContainer()->getParameter('app.host');
+
+        if (!is_string($host)) {
+            throw new \InvalidArgumentException('app.host param must be string');
+        }
+
+        return $host;
     }
 }

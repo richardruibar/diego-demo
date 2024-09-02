@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Post;
 use App\Form\CommentType;
+use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,12 +21,10 @@ class PostController extends AbstractController
     }
 
     #[Route('/', name: 'home_page')]
-    public function homePage(): Response
+    public function homePage(PostRepository $postRepository): Response
     {
         return $this->render('index.html.twig', [
-            'posts' => $this->entityManager->getRepository(
-                Post::class
-            )->fetchAll(),
+            'posts' => $postRepository->fetchAll(),
         ]);
     }
 
@@ -43,6 +42,7 @@ class PostController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Comment $comment */
             $comment = $form->getData();
             $post->addComment($comment);
 

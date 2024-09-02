@@ -6,6 +6,9 @@ namespace App\Admin;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
+/**
+ * @extends AbstractAdmin<object>
+ */
 class BaseAdmin extends AbstractAdmin
 {
     protected function configureRoutes(RouteCollectionInterface $collection

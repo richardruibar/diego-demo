@@ -43,7 +43,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
         $manager->flush();
     }
 
-    private function createUserAdmin(ObjectManager $manager)
+    private function createUserAdmin(ObjectManager $manager): void
     {
         $user = new User();
         $user
@@ -77,7 +77,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
         return $post;
     }
 
-    private function addComments(ObjectManager $manager, Post $post)
+    private function addComments(ObjectManager $manager, Post $post): void
     {
         $numberOfComments = rand(
             self::NUMBER_OF_COMMENTS_MIN,

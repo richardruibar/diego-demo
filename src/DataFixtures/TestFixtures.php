@@ -107,7 +107,7 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
         return ['test'];
     }
 
-    private function createUserAdmin(ObjectManager $manager)
+    private function createUserAdmin(ObjectManager $manager): void
     {
         $user = new User();
         $user
@@ -125,7 +125,7 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
         $manager->persist($user);
     }
 
-    private function createUnprivilegedUser(ObjectManager $manager)
+    private function createUnprivilegedUser(ObjectManager $manager): void
     {
         $user = new User();
         $user
@@ -222,7 +222,7 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
         return $post;
     }
 
-    private function insertComments(ObjectManager $manager, Post $post)
+    private function insertComments(ObjectManager $manager, Post $post): void
     {
         foreach (self::COMMENTS as $commentData) {
             $comment = $this->createComment($commentData, $post->getId().' ');
@@ -231,6 +231,9 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
         }
     }
 
+    /**
+     * @param array<string,string|null> $data
+     */
     private function createComment(array $data, string $prefix): Comment
     {
         try {
@@ -244,7 +247,9 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
                 ->setTitle($prefix.$data[self::TITLE])
                 ->setAuthor($prefix.$data[self::AUTHOR])
                 ->setContent($prefix.$data[self::CONTENT])
-                ->setCreatedAt(new DateTimeImmutable($data[self::CREATED_AT]))
+                ->setCreatedAt(
+                    new DateTimeImmutable($data[self::CREATED_AT] ?? 'now')
+                )
                 ->setDeletedAt($deletedAt)
             ;
         } catch (\Exception $e) {

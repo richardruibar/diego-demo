@@ -55,7 +55,7 @@ final class CommentAdmin extends BaseAdmin
                 'label' => 'Odesláno',
                 'accessor' =>
                     function (Comment $post) {
-                        return $post->getCreatedAt()->format(
+                        return $post->getCreatedAt()?->format(
                             $this->dateTimeFormat
                         );
                     },

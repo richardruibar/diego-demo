@@ -70,3 +70,8 @@ This ensures that the website under this domain runs in the test environment.
 ```bash
 $ php bin/phpunit
 ```
+
+### Run Phpstan
+```bash
+$ php vendor/bin/phpstan analyse src tests
+```

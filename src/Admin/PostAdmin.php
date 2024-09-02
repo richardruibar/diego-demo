@@ -95,7 +95,7 @@ final class PostAdmin extends BaseAdmin
                 'label' => 'Publikováno',
                 'accessor' =>
                     function (Post $post) {
-                        return $post->getCreatedAt()->format(
+                        return $post->getCreatedAt()?->format(
                             $this->dateTimeFormat
                         );
                     },
