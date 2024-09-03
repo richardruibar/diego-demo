@@ -16,11 +16,11 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture implements FixtureGroupInterface
 {
-    private const NUMBER_OF_POSTS = 5;
+    private const int NUMBER_OF_POSTS = 5;
 
-    private const NUMBER_OF_COMMENTS_MIN = 0;
+    private const int NUMBER_OF_COMMENTS_MIN = 0;
 
-    private const NUMBER_OF_COMMENTS_MAX = 20;
+    private const int NUMBER_OF_COMMENTS_MAX = 20;
 
     private Generator $faker;
 

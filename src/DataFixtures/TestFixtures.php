@@ -14,13 +14,13 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class TestFixtures extends Fixture implements FixtureGroupInterface
 {
-    private const TITLE = 'title';
-    private const AUTHOR = 'author';
-    private const CONTENT = 'content';
-    private const DELETED_AT = 'deleted_at';
-    private const CREATED_AT = 'created_at';
+    private const string TITLE = 'title';
+    private const string AUTHOR = 'author';
+    private const string CONTENT = 'content';
+    private const string DELETED_AT = 'deleted_at';
+    private const string CREATED_AT = 'created_at';
 
-    private const COMMENTS = [
+    private const array COMMENTS = [
         [
             self::TITLE => 'Prokop a loudal se zpátky s pěstmi zaťatými. Pan.',
             self::AUTHOR => 'Renata Bartošová',
