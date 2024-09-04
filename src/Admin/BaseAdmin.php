@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Admin;
@@ -11,7 +12,8 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
  */
 class BaseAdmin extends AbstractAdmin
 {
-    protected function configureRoutes(RouteCollectionInterface $collection
+    protected function configureRoutes(
+        RouteCollectionInterface $collection
     ): void {
         $collection->remove('show');
     }

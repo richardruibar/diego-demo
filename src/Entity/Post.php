@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Entity;
@@ -142,7 +143,7 @@ class Post
 
     public function addComment(Comment $comment): static
     {
-        if ( ! $this->comments->contains($comment)) {
+        if (!$this->comments->contains($comment)) {
             $this->comments->add($comment);
             $comment->setPost($this);
         }

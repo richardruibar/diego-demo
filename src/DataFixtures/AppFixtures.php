@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\DataFixtures;
@@ -48,8 +49,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
         $user = new User();
         $user
             ->setEmail('admin@example.com')
-            ->setRoles(['ROLE_ADMIN'])
-        ;
+            ->setRoles(['ROLE_ADMIN']);
 
         $hashedPassword = $this->passwordHasher->hashPassword(
             $user,
@@ -71,8 +71,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             ->setContent($this->faker->realText(rand(1000, 2000)))
             ->setCreatedAt(
                 DateTimeImmutable::createFromMutable($this->faker->dateTime)
-            )
-        ;
+            );
 
         return $post;
     }
@@ -104,8 +103,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             ->setContent($this->faker->realText(rand(100, 2000)))
             ->setCreatedAt(
                 DateTimeImmutable::createFromMutable($this->faker->dateTime)
-            )
-        ;
+            );
 
         return $comment;
     }

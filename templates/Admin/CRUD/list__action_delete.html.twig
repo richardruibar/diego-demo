@@ -7,11 +7,9 @@
     {% else %}
         {% set button_label = 'delete_soft'|trans({}, 'messages') %}
     {% endif %}
-    <a
-            href="{{ admin.generateObjectUrl('delete', object, actions.link_parameters|default([])) }}"
-            class="btn btn-sm btn-default delete_link{% if object.getDeletedAt is not null %} delete_hard{% endif %}"
-            title="{{ button_label }}"
-    >
+    <a href="{{ admin.generateObjectUrl('delete', object, actions.link_parameters|default([])) }}"
+       class="btn btn-sm btn-default delete_link{% if object.getDeletedAt is not null %} delete_hard{% endif %}"
+       title="{{ button_label }}">
         {% if button_content == 'icon' or button_content == 'all' %}
             <i class="fas fa-times" aria-hidden="true"></i>
         {% endif %}

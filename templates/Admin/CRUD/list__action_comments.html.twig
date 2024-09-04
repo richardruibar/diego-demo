@@ -1,10 +1,8 @@
 {% set button_content = sonata_config.getOption('list_action_button_content') %}
 
-<a
-        href="{{ path('admin_app_post_comment_list', {id: object.id}) }}"
-        class="btn btn-sm btn-default view_link"
-        title="{{ 'action_comments'|trans({}, 'messages') }}"
->
+<a href="{{ path('admin_app_post_comment_list', {id: object.id}) }}"
+   class="btn btn-sm btn-default view_link"
+   title="{{ 'action_comments'|trans({}, 'messages') }}">
     {% if button_content == 'icon' or button_content == 'all' %}
         <i class="far fa-comments" aria-hidden="true"></i>
     {% endif %}

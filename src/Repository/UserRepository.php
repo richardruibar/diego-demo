@@ -5,6 +5,7 @@
  * @link https://youtrack.jetbrains.com/issue/WI-71013/Multiple-definitions-exist-for-class-for-definitions-inside-if-else-statement
  */
 declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\User;
@@ -31,7 +32,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         PasswordAuthenticatedUserInterface $user,
         string $newHashedPassword
     ): void {
-        if ( ! $user instanceof User) {
+        if (!$user instanceof User) {
             throw new UnsupportedUserException(
                 sprintf('Instances of "%s" are not supported.', $user::class)
             );

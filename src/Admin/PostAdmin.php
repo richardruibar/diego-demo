@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Admin;
@@ -27,7 +28,7 @@ final class PostAdmin extends BaseAdmin
         string $action,
         ?AdminInterface $childAdmin = null
     ): void {
-        if ( ! $childAdmin && $action != 'edit') {
+        if (!$childAdmin && $action != 'edit') {
             return;
         }
 
@@ -42,8 +43,7 @@ final class PostAdmin extends BaseAdmin
                     ['id' => $id]
                 )
             )
-            ->setAttribute('icon', Config::ICO_POST)
-        ;
+            ->setAttribute('icon', Config::ICO_POST);
 
         $menu
             ->addChild(
@@ -53,8 +53,7 @@ final class PostAdmin extends BaseAdmin
                     ['id' => $id]
                 )
             )
-            ->setAttribute('icon', Config::ICO_COMMENT)
-        ;
+            ->setAttribute('icon', Config::ICO_COMMENT);
     }
 
     protected function configureFormFields(FormMapper $form): void
@@ -78,8 +77,7 @@ final class PostAdmin extends BaseAdmin
                 'attr' => [
                     'rows' => 10,
                 ],
-            ])
-        ;
+            ]);
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -110,7 +108,6 @@ final class PostAdmin extends BaseAdmin
                     ],
                 ],
                 'header_style' => Config::POST_LIST_ACTIONS_HEADER_STYLE,
-            ])
-        ;
+            ]);
     }
 }

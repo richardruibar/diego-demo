@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Form;
@@ -29,8 +30,7 @@ class CommentType extends AbstractType
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Odeslat',
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

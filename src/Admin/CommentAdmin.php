@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Admin;
@@ -38,8 +39,7 @@ final class CommentAdmin extends BaseAdmin
                 'attr' => [
                     'rows' => 10,
                 ],
-            ])
-        ;
+            ]);
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -69,14 +69,15 @@ final class CommentAdmin extends BaseAdmin
                     'edit' => [],
                 ],
                 'header_style' => Config::COMMENT_LIST_ACTIONS_HEADER_STYLE,
-            ])
-        ;
+            ]);
     }
 
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        if ( ! $this->isChild()) {
-            $filter->add('post');
+        if (!$this->isChild()) {
+            $filter->add('post', null, [
+                'label' => 'Příspěvek',
+            ]);
         }
     }
 }
