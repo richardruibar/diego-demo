@@ -75,3 +75,13 @@ $ php bin/phpunit
 ```bash
 $ php vendor/bin/phpstan analyse src tests
 ```
+
+### Production mode
+Set `APP_ENV=prod` in `.env` or `.env.local.` Install assets:
+```bash
+$ php bin/console asset-map:compile
+```
+Run migrations:
+```bash
+$ php bin/console doctrine:migrations:migrate
+```
