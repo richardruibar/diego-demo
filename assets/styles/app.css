@@ -68,3 +68,13 @@ button {
 a {
     color: #ba0001;
 }
+
+#comment ul {
+    background-color: rgba(186, 0, 1, 0.21);
+    padding: 0.5rem 2rem;
+    border: 1px solid #ba0001;
+}
+
+#comment ul li {
+    list-style-type: non;
+}

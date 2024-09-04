@@ -39,6 +39,7 @@ class PostController extends AbstractController
             ->findOneBy(['slug' => $slug]);
 
         $comment = new Comment();
+        $post->addComment($comment);
         $form = $this->createForm(CommentType::class, $comment);
 
         $form->handleRequest($request);
