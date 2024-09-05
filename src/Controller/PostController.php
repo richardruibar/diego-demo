@@ -29,7 +29,7 @@ class PostController extends AbstractController
         ]);
     }
 
-    #[Route('/{slug}', name: 'post')]
+    #[Route('/post/{slug}', name: 'post')]
     public function viewPost(Request $request, string $slug): Response
     {
         $this->entityManager->getFilters()->enable('softdeleteable');
@@ -37,6 +37,10 @@ class PostController extends AbstractController
         /** @var Post $post */
         $post = $this->entityManager->getRepository(Post::class)
             ->findOneBy(['slug' => $slug]);
+
+        if (empty($post)) {
+            throw $this->createNotFoundException('Příspěvek nenalezen');
+        }
 
         $comment = new Comment();
         $post->addComment($comment);
