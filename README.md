@@ -8,6 +8,21 @@ $ composer install
 
 Create a `.env.local` file (do not commit this file) in the root directory and set the database connection in it. An example of .env.local content:
 
+
+For database in Docker run following commands in docker directory:
+
+```bash
+$ docker build -t diego_demo_mysql .
+$ docker run --name diego_demo_mysql -d -p 3306:3306 diego_demo_mysql
+```
+
+Then set DATABASE_URL:
+```
+DATABASE_URL="mysql://root:diego-demo@127.0.0.1:3306/diego_demo"
+```
+
+If you want to use your own MySQL use following:
+
 ```
 APP_ENV=dev
 DATABASE_URL="mysql://[DB_USER]:[DB_PASSWORD]@127.0.0.1:3306/[DB_NAME]?serverVersion=10.4.24-MariaDB&charset=utf8mb4"
