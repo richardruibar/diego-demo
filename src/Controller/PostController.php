@@ -24,6 +24,8 @@ class PostController extends AbstractController
     #[Route('/', name: 'home_page')]
     public function homePage(PostRepository $postRepository): Response
     {
+        $this->entityManager->getFilters()->enable('softdeleteable');
+
         return $this->render('index.html.twig', [
             'posts' => $postRepository->fetchAll(),
         ]);
@@ -43,7 +45,7 @@ class PostController extends AbstractController
         }
 
         $comment = new Comment();
-        $post->addComment($comment);
+        $comment->setPost($post);
         $form = $this->createForm(CommentType::class, $comment);
 
         $form->handleRequest($request);

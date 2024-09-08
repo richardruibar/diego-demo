@@ -49,6 +49,7 @@ class Post
         cascade: ['persist', 'remove'],
         orphanRemoval: true
     )]
+    #[ORM\OrderBy(['createdAt' => 'DESC'])]
     private Collection $comments;
 
     public function __construct()
