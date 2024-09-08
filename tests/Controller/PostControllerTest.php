@@ -17,7 +17,7 @@ class PostControllerTest extends WebTestCase
         $this->assertSelectorTextSame('h2', 'Nevíš nikdy nic');
         /** @noinspection CssInvalidPseudoSelector */
         $this->assertCount(1, $crawler->filter('h2:last-of-type:contains("Paul s košem na lokti,.")'));
-        $this->assertSelectorCount(4,'h2');
+        $this->assertSelectorCount(4, 'h2');
 
         $this->assertAnySelectorTextContains('span.author', 'RNDr. Vítězslav Machálek');
         $this->assertAnySelectorTextContains('p.annotation', 'zamračí se, odvrátí se');

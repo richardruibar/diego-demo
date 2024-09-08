@@ -3,9 +3,11 @@
 namespace App\Tests\Admin;
 
 use App\DataFixtures\TestFixtures;
+use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Tests\Helper\SonataFormHelper;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class PostTest extends WebTestCase
 {
@@ -14,12 +16,14 @@ class PostTest extends WebTestCase
     private const ANNOTATION = 'Nový anotace';
     private const CONTENT = 'Nový obsah';
 
-    public function testPostList()
+    public function testPostList(): void
     {
         $client = static::createClient();
 
+        /** @var UserRepository $userRepository */
         $userRepository = static::getContainer()->get(UserRepository::class);
-        $testUser = $userRepository->findOneByEmail(TestFixtures::ADMIN_EMAIL);
+        $testUser = $userRepository->findOneBy(['email' => TestFixtures::ADMIN_EMAIL]);
+        /** @var User|UserInterface $testUser */
         $client->loginUser($testUser);
 
         $client->request('GET', '/admin/app/post/list');
@@ -35,12 +39,14 @@ class PostTest extends WebTestCase
         $this->assertAnySelectorTextContains('div.pull-right', '4 záznamy');
     }
 
-    public function testEditPost()
+    public function testEditPost(): void
     {
         $client = static::createClient();
 
+        /** @var UserRepository $userRepository */
         $userRepository = static::getContainer()->get(UserRepository::class);
-        $testUser = $userRepository->findOneByEmail(TestFixtures::ADMIN_EMAIL);
+        $testUser = $userRepository->findOneBy(['email' => TestFixtures::ADMIN_EMAIL]);
+        /** @var User|UserInterface $testUser */
         $client->loginUser($testUser);
 
         $client->request('GET', '/admin/app/post/list');

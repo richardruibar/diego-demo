@@ -11,6 +11,6 @@ if (file_exists(dirname(__DIR__).'/config/bootstrap.php')) {
 }
 
 passthru(sprintf(
-      'php "%s/../bin/console" --env=test doctrine:fixtures:load --group=test -n',
-      __DIR__
-    ));
+    'php "%s/../bin/console" --env=test doctrine:fixtures:load --group=test -n',
+    __DIR__
+));

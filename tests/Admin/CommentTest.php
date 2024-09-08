@@ -3,17 +3,21 @@
 namespace App\Tests\Admin;
 
 use App\DataFixtures\TestFixtures;
+use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class CommentTest extends WebTestCase
 {
-    public function testCommentList()
+    public function testCommentList(): void
     {
         $client = static::createClient();
 
+        /** @var UserRepository $userRepository */
         $userRepository = static::getContainer()->get(UserRepository::class);
-        $testUser = $userRepository->findOneByEmail(TestFixtures::ADMIN_EMAIL);
+        $testUser = $userRepository->findOneBy(['email' => TestFixtures::ADMIN_EMAIL]);
+        /** @var User|UserInterface $testUser */
         $client->loginUser($testUser);
 
         $client->request('GET', '/admin/app/post/list');
@@ -35,12 +39,14 @@ class CommentTest extends WebTestCase
         $this->assertAnySelectorTextContains('div.pull-right', '7 záznamů');
     }
 
-    public function testSoftDeletion()
+    public function testSoftDeletion(): void
     {
         $client = static::createClient();
 
+        /** @var UserRepository $userRepository */
         $userRepository = static::getContainer()->get(UserRepository::class);
-        $testUser = $userRepository->findOneByEmail(TestFixtures::ADMIN_EMAIL);
+        $testUser = $userRepository->findOneBy(['email' => TestFixtures::ADMIN_EMAIL]);
+        /** @var User|UserInterface $testUser */
         $client->loginUser($testUser);
 
         // Assert that the comment is present on the post page

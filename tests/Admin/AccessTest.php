@@ -3,12 +3,14 @@
 namespace App\Tests\Admin;
 
 use App\DataFixtures\TestFixtures;
+use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class AccessTest extends WebTestCase
 {
-    public function testAnonymousUserCanNotAccessAdmin()
+    public function testAnonymousUserCanNotAccessAdmin(): void
     {
         $client = static::createClient();
         $client->request('GET', '/admin/dashboard');
@@ -16,24 +18,28 @@ class AccessTest extends WebTestCase
         $this->assertSelectorTextContains('h1', 'Přihlaste se prosím');
     }
 
-    public function testUnprivilegedUserCanNotAccessAdmin()
+    public function testUnprivilegedUserCanNotAccessAdmin(): void
     {
         $client = static::createClient();
 
+        /** @var UserRepository $userRepository */
         $userRepository = static::getContainer()->get(UserRepository::class);
-        $testUser = $userRepository->findOneByEmail(TestFixtures::USER_EMAIL);
+        /** @var User|UserInterface $testUser */
+        $testUser = $userRepository->findOneBy(['email' => TestFixtures::USER_EMAIL]);
         $client->loginUser($testUser);
 
         $client->request('GET', '/admin/dashboard');
         $this->assertResponseStatusCodeSame(403);
     }
 
-    public function testAdminCanAccessAdmin()
+    public function testAdminCanAccessAdmin(): void
     {
         $client = static::createClient();
 
+        /** @var UserRepository $userRepository */
         $userRepository = static::getContainer()->get(UserRepository::class);
-        $testUser = $userRepository->findOneByEmail(TestFixtures::ADMIN_EMAIL);
+        $testUser = $userRepository->findOneBy(['email' => TestFixtures::ADMIN_EMAIL]);
+        /** @var User|UserInterface $testUser */
         $client->loginUser($testUser);
 
         $client->request('GET', '/admin/dashboard');

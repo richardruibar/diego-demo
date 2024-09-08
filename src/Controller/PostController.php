@@ -36,7 +36,7 @@ class PostController extends AbstractController
     {
         $this->entityManager->getFilters()->enable('softdeleteable');
 
-        /** @var Post $post */
+        /** @var null|Post $post */
         $post = $this->entityManager->getRepository(Post::class)
             ->findOneBy(['slug' => $slug]);
 

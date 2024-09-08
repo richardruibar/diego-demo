@@ -17,7 +17,7 @@ final class PostAdmin extends BaseAdmin
 {
     private string $dateTimeFormat;
 
-    public function setDateTimeFormat(string $dateTimeFormat)
+    public function setDateTimeFormat(string $dateTimeFormat): void
     {
         $this->dateTimeFormat = $dateTimeFormat;
     }
