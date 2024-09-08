@@ -23,21 +23,17 @@ In your web server configuration, set the DocumentRoot to the `public` directory
 
 The data fixtures include admin login credentials. Although it's generally insecure, this is only a demo app, so it's done this way for simplicity. The admin user login is `admin@example.com`, and the password is `123456`.
 
-The admin panel can be accessed at `/admin`.
+The admin panel can be accessed at `/admin/dashboard`.
 
 ## Test Setup
 
 ### Create a Test Database
 Create a database with the suffix `_test`. For example, if your main database is named `diego`, create a database named `diego_test`.
 
-### Set Up a Test Domain
-Set up a test domain, for example `diego.test`. This domain will be used to run the test version of your website (e.g., https://diego.test).
-
 ### Configure the Test Environment
 Create a `.env.test.local` file in the root directory (do not commit this file) with the following content:
 
 ```
-APP_HOST="diego.test"
 DATABASE_URL="mysql://[DB_USER]:[DB_PASSWORD]@127.0.0.1:3306/[DB_NAME]?serverVersion=10.4.24-MariaDB&charset=utf8mb4"
 ```
 
@@ -47,24 +43,6 @@ DATABASE_URL="mysql://[DB_USER]:[DB_PASSWORD]@127.0.0.1:3306/[DB_NAME]?serverVer
 ```bash
 $ php bin/console --env=test doctrine:schema:create
 ```
-
-### Load Test Fixtures
-```bash
-$ php bin/console --env=test doctrine:fixtures:load --group=test
-```
-**Note:** Be sure to include the `--group=test` flag.
-
-### Set the Server to Run in the Test Environment
-Set the `APP_ENV` environment variable to `test` for the appropriate webserver host. For example, in Apache, you can do it like this:
-```apacheconf
-<VirtualHost 192.168.1.37:443>
-    ...
-    SetEnv APP_ENV test
-    ...
-</VirtualHost>
-```
-
-This ensures that the website under this domain runs in the test environment.
 
 ### Run the Tests
 ```bash

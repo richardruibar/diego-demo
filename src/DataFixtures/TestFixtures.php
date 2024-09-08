@@ -15,6 +15,11 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class TestFixtures extends Fixture implements FixtureGroupInterface
 {
+    public const ADMIN_EMAIL = 'admin@example.com';
+    public const ADMIN_PASSWORD = '123456';
+    public const USER_EMAIL = 'user@example.com';
+    private const USER_PASSWORD = '123456';
+
     private const TITLE = 'title';
     private const AUTHOR = 'author';
     private const CONTENT = 'content';
@@ -80,19 +85,19 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
 
         $post = $this->createPostZapasil($manager);
         $manager->flush();
-        $this->insertComments($manager, $post);
+        $this->insertComments($manager, $post, '1');
 
         $post = $this->createPostOdkopnuty($manager);
         $manager->flush();
-        $this->insertComments($manager, $post);
+        $this->insertComments($manager, $post, '2');
 
         $post = $this->createPostNevis($manager);
         $manager->flush();
-        $this->insertComments($manager, $post);
+        $this->insertComments($manager, $post, '3');
 
         $post = $this->createPostPaul($manager);
         $manager->flush();
-        $this->insertComments($manager, $post);
+        $this->insertComments($manager, $post, '4');
 
         $manager->flush();
     }
@@ -106,12 +111,12 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
     {
         $user = new User();
         $user
-            ->setEmail('admin@example.com')
+            ->setEmail(self::ADMIN_EMAIL)
             ->setRoles(['ROLE_ADMIN']);
 
         $hashedPassword = $this->passwordHasher->hashPassword(
             $user,
-            plainPassword: '123456'
+            plainPassword: self::ADMIN_PASSWORD
         );
 
         $user->setPassword($hashedPassword);
@@ -123,11 +128,11 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
     {
         $user = new User();
         $user
-            ->setEmail('user@example.com');
+            ->setEmail(self::USER_EMAIL);
 
         $hashedPassword = $this->passwordHasher->hashPassword(
             $user,
-            plainPassword: '123456'
+            plainPassword: self::USER_PASSWORD
         );
 
         $user->setPassword($hashedPassword);
@@ -211,10 +216,10 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
         return $post;
     }
 
-    private function insertComments(ObjectManager $manager, Post $post): void
+    private function insertComments(ObjectManager $manager, Post $post, string $prefix): void
     {
         foreach (self::COMMENTS as $commentData) {
-            $comment = $this->createComment($commentData, $post->getId().' ');
+            $comment = $this->createComment($commentData, $prefix.' ');
             $post->addComment($comment);
         }
     }
