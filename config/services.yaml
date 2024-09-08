@@ -37,8 +37,11 @@ services:
             - { name: sonata.admin, model_class: App\Entity\Post, manager_type: orm, label: Příspěvky }
         calls:
             - [addChild, ['@App\Admin\CommentAdmin', 'post']]
+            - [setDateTimeFormat, ['%date_time_format%']]
 
     App\Admin\CommentAdmin:
         class: App\Admin\CommentAdmin
         tags:
             - { name: sonata.admin, model_class: App\Entity\Comment, manager_type: orm, label: Komentáře }
+        calls:
+            - [setDateTimeFormat, ['%date_time_format%']]

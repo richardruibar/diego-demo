@@ -13,13 +13,11 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 final class CommentAdmin extends BaseAdmin
 {
-    public function __construct(
-        private readonly string $dateTimeFormat,
-        ?string $code = null,
-        ?string $class = null,
-        ?string $baseControllerName = null
-    ) {
-        parent::__construct($code, $class, $baseControllerName);
+    private string $dateTimeFormat;
+
+    public function setDateTimeFormat(string $dateTimeFormat)
+    {
+        $this->dateTimeFormat = $dateTimeFormat;
     }
 
     protected function configureFormFields(FormMapper $form): void
