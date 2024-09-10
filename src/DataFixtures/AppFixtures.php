@@ -38,7 +38,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
         for ($i = 0; $i < self::NUMBER_OF_POSTS; ++$i) {
             $post = $this->createPost();
             $manager->persist($post);
-            $this->addComments($manager, $post);
+            $this->addComments($post);
         }
 
         $manager->flush();
@@ -76,7 +76,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
         return $post;
     }
 
-    private function addComments(ObjectManager $manager, Post $post): void
+    private function addComments(Post $post): void
     {
         $numberOfComments = rand(
             self::NUMBER_OF_COMMENTS_MIN,

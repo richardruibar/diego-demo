@@ -85,19 +85,19 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
 
         $post = $this->createPostZapasil($manager);
         $manager->flush();
-        $this->insertComments($manager, $post, '1');
+        $this->insertComments($post, '1');
 
         $post = $this->createPostOdkopnuty($manager);
         $manager->flush();
-        $this->insertComments($manager, $post, '2');
+        $this->insertComments($post, '2');
 
         $post = $this->createPostNevis($manager);
         $manager->flush();
-        $this->insertComments($manager, $post, '3');
+        $this->insertComments($post, '3');
 
         $post = $this->createPostPaul($manager);
         $manager->flush();
-        $this->insertComments($manager, $post, '4');
+        $this->insertComments($post, '4');
 
         $manager->flush();
     }
@@ -216,7 +216,7 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
         return $post;
     }
 
-    private function insertComments(ObjectManager $manager, Post $post, string $prefix): void
+    private function insertComments(Post $post, string $prefix): void
     {
         foreach (self::COMMENTS as $commentData) {
             $comment = $this->createComment($commentData, $prefix.' ');
