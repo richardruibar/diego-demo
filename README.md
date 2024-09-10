@@ -6,11 +6,18 @@
 $ composer install
 ```
 
+Run docker-compose for creating database for testing and web environment.
+```bash
+docker-compose up -d
+```
+
 Create a `.env.local` file (do not commit this file) in the root directory and set the database connection in it. An example of .env.local content:
+
+**DB_USER** and **DB_PASSWORD** can be found in docker-compose.yml in root directory of this project.
 
 ```
 APP_ENV=dev
-DATABASE_URL="mysql://[DB_USER]:[DB_PASSWORD]@127.0.0.1:3306/[DB_NAME]?serverVersion=10.4.24-MariaDB&charset=utf8mb4"
+DATABASE_URL="mysql://[DB_USER]:[DB_PASSWORD]@127.0.0.1:3307/[DB_NAME]"
 ```
 
 Run the schema update and load fixtures:
@@ -33,8 +40,10 @@ Create a database with the suffix `_test`. For example, if your main database is
 ### Configure the Test Environment
 Create a `.env.test.local` file in the root directory (do not commit this file) with the following content:
 
+**DB_USER** and **DB_PASSWORD** can be found in docker-compose.yml in root directory of this project.
+
 ```
-DATABASE_URL="mysql://[DB_USER]:[DB_PASSWORD]@127.0.0.1:3306/[DB_NAME]?serverVersion=10.4.24-MariaDB&charset=utf8mb4"
+DATABASE_URL="mysql://[DB_USER]:[DB_PASSWORD]@127.0.0.1:3308/[DB_NAME]"
 ```
 
 **Note:** Symfony automatically appends the `_test` suffix to the `DB_NAME` specified in `.env.test.local`. Therefore, if your test database is `diego_test`, set `DB_NAME` to `diego` in the configuration.

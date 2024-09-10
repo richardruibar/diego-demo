@@ -1,0 +1,24 @@
+services:
+  mysql_server:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: diego-demo
+      MYSQL_DATABASE: diego_demo
+    ports:
+      - "3307:3306"
+    volumes:
+      - diego_demo_volume:/var/lib/mysql
+
+  mysql_test_server:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: diego-demo
+      MYSQL_DATABASE: diego_demo_test
+    ports:
+      - "3308:3306"
+    volumes:
+      - diego_demo_test_volume:/var/lib/mysql
+
+volumes:
+  diego_demo_volume:
+  diego_demo_test_volume:
