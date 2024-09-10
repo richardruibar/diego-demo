@@ -6,19 +6,14 @@
 $ composer install
 ```
 
-Run docker-compose for creating database for testing and web environment.
-```bash
-docker-compose up -d
-```
-
 Create a `.env.local` file (do not commit this file) in the root directory and set the database connection in it. An example of .env.local content:
-
-**DB_USER** and **DB_PASSWORD** can be found in docker-compose.yml in root directory of this project.
 
 ```
 APP_ENV=dev
-DATABASE_URL="mysql://[DB_USER]:[DB_PASSWORD]@127.0.0.1:3307/[DB_NAME]"
+DATABASE_URL="mysql://root:diego-demo@127.0.0.1:3307/diego_demo?serverVersion=9.0.1&charset=utf8mb4"
 ```
+
+**Note:** The setting must be the same as in the docker-compose.yml in root directory of this project.
 
 Run the schema update and load fixtures:
 ```bash
@@ -26,29 +21,41 @@ $ php bin/console doctrine:schema:update --dump-sql -e dev --force
 $ php bin/console doctrine:fixtures:load --group=app
 ```
 
-In your web server configuration, set the DocumentRoot to the `public` directory.
+**Note:** The data fixtures include admin login credentials. Although it's generally insecure, this is only a demo app, so it's done this way for simplicity. 
 
-The data fixtures include admin login credentials. Although it's generally insecure, this is only a demo app, so it's done this way for simplicity. The admin user login is `admin@example.com`, and the password is `123456`.
+## Run the application
 
+### Run the database
+Run docker-compose to create the database for testing and the web environment.
+```bash
+$ docker-compose up -d
+```
+
+### Run the web server
+```bash
+$ symfony server:start
+```
+
+Visit the URL displayed by the command above. For example: https://127.0.0.1:8000/
+
+## Admin panel
 The admin panel can be accessed at `/admin/dashboard`.
 
-## Test Setup
+The admin user login is `admin@example.com`, and the password is `123456`.
 
-### Create a Test Database
-Create a database with the suffix `_test`. For example, if your main database is named `diego`, create a database named `diego_test`.
+## Test Setup
 
 ### Configure the Test Environment
 Create a `.env.test.local` file in the root directory (do not commit this file) with the following content:
 
-**DB_USER** and **DB_PASSWORD** can be found in docker-compose.yml in root directory of this project.
-
 ```
-DATABASE_URL="mysql://[DB_USER]:[DB_PASSWORD]@127.0.0.1:3308/[DB_NAME]"
+DATABASE_URL="mysql://root:diego-demo@127.0.0.1:3308/diego_demo?serverVersion=9.0.1&charset=utf8mb4"
 ```
+**Note:** The setting must be the same as in the docker-compose.yml in root directory of this project.
 
 **Note:** Symfony automatically appends the `_test` suffix to the `DB_NAME` specified in `.env.test.local`. Therefore, if your test database is `diego_test`, set `DB_NAME` to `diego` in the configuration.
 
-### Import the Database Schema
+### Import the Test Database Schema
 ```bash
 $ php bin/console --env=test doctrine:schema:create
 ```
@@ -57,6 +64,8 @@ $ php bin/console --env=test doctrine:schema:create
 ```bash
 $ php bin/phpunit
 ```
+
+**Note**: The tests will automatically load the test data fixtures at the start.
 
 ### Run Phpstan
 ```bash
