@@ -8,7 +8,7 @@ use Sonata\AdminBundle\Translator\LabelTranslatorStrategyInterface;
 
 class LabelTranslatorStrategy implements LabelTranslatorStrategyInterface
 {
-    private const TRANSLATIONS = [
+    private const array TRANSLATIONS = [
         '_actions' => 'Akce',   // ListMapper::NAME_ACTIONS
         'Comment_list' => 'Komentáře',
         'Post_list' => 'Příspěvky',

@@ -11,10 +11,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class PostTest extends WebTestCase
 {
-    private const TITLE = 'Nový titulek';
-    private const AUTHOR = 'Nový autor';
-    private const ANNOTATION = 'Nový anotace';
-    private const CONTENT = 'Nový obsah';
+    private const string TITLE = 'Nový titulek';
+    private const string AUTHOR = 'Nový autor';
+    private const string ANNOTATION = 'Nový anotace';
+    private const string CONTENT = 'Nový obsah';
 
     public function testPostList(): void
     {

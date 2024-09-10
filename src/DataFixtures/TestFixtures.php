@@ -15,18 +15,18 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class TestFixtures extends Fixture implements FixtureGroupInterface
 {
-    public const ADMIN_EMAIL = 'admin@example.com';
-    public const ADMIN_PASSWORD = '123456';
-    public const USER_EMAIL = 'user@example.com';
-    private const USER_PASSWORD = '123456';
+    public const string ADMIN_EMAIL = 'admin@example.com';
+    public const string ADMIN_PASSWORD = '123456';
+    public const string USER_EMAIL = 'user@example.com';
+    private const string USER_PASSWORD = '123456';
 
-    private const TITLE = 'title';
-    private const AUTHOR = 'author';
-    private const CONTENT = 'content';
-    private const DELETED_AT = 'deleted_at';
-    private const CREATED_AT = 'created_at';
+    private const string TITLE = 'title';
+    private const string AUTHOR = 'author';
+    private const string CONTENT = 'content';
+    private const string DELETED_AT = 'deleted_at';
+    private const string CREATED_AT = 'created_at';
 
-    private const COMMENTS = [
+    private const array COMMENTS = [
         [
             self::TITLE => 'Prokop a loudal se zpátky s pěstmi zaťatými. Pan.',
             self::AUTHOR => 'Renata Bartošová',
