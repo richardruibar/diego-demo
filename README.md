@@ -15,6 +15,11 @@ DATABASE_URL="mysql://root:diego-demo@127.0.0.1:3307/diego_demo?serverVersion=9.
 
 **Note:** The setting must be the same as in the docker-compose.yml in root directory of this project.
 
+Run docker-compose to create the database for testing and the web environment.
+```bash
+$ docker-compose up -d
+```
+
 Run the schema update and load fixtures:
 ```bash
 $ php bin/console doctrine:schema:update --dump-sql -e dev --force
@@ -24,12 +29,6 @@ $ php bin/console doctrine:fixtures:load --group=app
 **Note:** The data fixtures include admin login credentials. Although it's generally insecure, this is only a demo app, so it's done this way for simplicity. 
 
 ## Run the application
-
-### Run the database
-Run docker-compose to create the database for testing and the web environment.
-```bash
-$ docker-compose up -d
-```
 
 ### Run the web server
 ```bash
